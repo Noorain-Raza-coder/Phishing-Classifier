@@ -1,2 +1,5 @@
 myvenv
-python=3.8
+.env
+logs
+artifacts
+test_csv_data

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Detection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .dropzone {
+            border: 2px dashed #fff;
+            padding: 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .dropzone:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .btn {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #e68900;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        label.upload-label {
+            display: block;
+            cursor: pointer;
+            background: #333;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Phishing Detection System</h1>
+    </header>
+    <div class="container">
+        <h1>Upload CSV for Prediction</h1>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <div class="dropzone" onclick="document.getElementById('fileInput').click();">
+                <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" alt="Upload Icon">
+                <p>Drag & Drop your CSV file here</p>
+                <input type="file" id="fileInput" name="file" accept=".csv">
+            </div>
+            <button type="submit" class="btn">Upload File</button>
+        </form>
+    </div>
+	<h1>Result : {{prediction}}</h1>
+</body>
+</html>
