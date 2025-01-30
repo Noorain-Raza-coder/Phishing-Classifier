@@ -1,9 +1,4 @@
-
-
-# from src.constant import *
-# from src.configuration.mongo_db_connection import MongoDBClient
 from src.exception import CustomException
-
 import os
 import sys
 import pandas as pd

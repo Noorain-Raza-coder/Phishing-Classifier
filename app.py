@@ -29,10 +29,6 @@ def predict():
 
             return render_template('prediction.html' , prediction=output)
 
-            # logging.info("prediction completed. Downloading prediction file.")
-            # return send_file(prediction_file_detail.prediction_file_path,
-            #                 download_name= prediction_file_detail.prediction_file_name,
-            #                 as_attachment= True)
         
         else:
             return render_template('prediction.html')

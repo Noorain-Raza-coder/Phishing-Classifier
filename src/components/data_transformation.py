@@ -28,16 +28,7 @@ class DataTransformation:
     
 
     def initiate_data_transformation(self , raw_data_file_path):
-        """
-            Method Name :   initiate_data_transformation
-            Description :   This method initiates the data transformation component for the pipeline 
-            
-            Output      :   data transformation artifact is created and returned 
-            On Failure  :   Write an exception log and then raise an exception
-            
-            Version     :   1.2
-            Revisions   :   moved setup to cloud
-        """
+        
 
         logging.info(
             "Entered initiate_data_transformation method of Data_Transformation class"

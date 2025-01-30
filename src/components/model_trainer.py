@@ -1,8 +1,4 @@
 from sklearn.linear_model import LogisticRegression
-# from sklearn.tree import DecisionTreeClassifier
-# from sklearn.svm import SVC
-# from sklearn.ensemble import RandomForestClassifier
-
 from sklearn.naive_bayes import GaussianNB
 from xgboost import XGBClassifier
 
@@ -16,6 +12,7 @@ from src.logger import logging
 from src.exception import CustomException
 import sys
 from src import utils
+from src.constant import *
 
 
 
@@ -28,11 +25,6 @@ class ModelTrainerConfig:
 class ModelTrainer:
     def __init__(self) -> None:
         self.model_trainer_config =  ModelTrainerConfig()
-
-        # self.models = {"LogisticRegression" : LogisticRegression(),
-        #                 "DecisionTreeClassifier" : DecisionTreeClassifier(),
-        #                 "SVC" : SVC(),
-        #                 "RandomForestClassifier" : RandomForestClassifier()}
 
         self.models = {
                         "GaussianNB": GaussianNB(),
@@ -99,6 +91,10 @@ class ModelTrainer:
             final_model.fit(x_train , y_train)
 
             utils.save_obj(obj = final_model , file_path = self.model_trainer_config.model_object_path)
+
+            utils.upload_file(from_filename=self.model_trainer_config.model_object_path,
+                                   to_filename="model.pkl",
+                                   bucket_name=AWS_S3_BUCKET_NAME)
         
         except Exception as e:
             raise CustomException(e,sys)

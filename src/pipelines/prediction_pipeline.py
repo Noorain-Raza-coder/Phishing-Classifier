@@ -6,13 +6,8 @@ from src import utils
 import pandas as pd
 from flask import request
 from dataclasses import dataclass
+from src.constant import *
         
-        
-# @dataclass
-# class PredictionFileDetail:
-#     prediction_output_dirname: str = "predictions"
-#     prediction_file_name:str =  "predicted_file.csv"
-#     prediction_file_path:str = os.path.join(prediction_output_dirname,prediction_file_name)
 
 
 
@@ -20,7 +15,7 @@ class PredictionPipeline:
     def __init__(self, request: request):
 
         self.request = request
-        # self.prediction_file_detail = PredictionFileDetail()
+        
 
 
 
@@ -54,17 +49,20 @@ class PredictionPipeline:
 
     def predict(self, features):
             try:
-                # model_path = self.utils.download_model(
-                #     bucket_name=AWS_S3_BUCKET_NAME,
-                #     bucket_file_name="model.pkl",
-                #     dest_file_name="model.pkl",
-                # )
 
-                preprocessor_obj_path = os.path.join("artifacts" , "preprocessor.pkl")
-                model_obj_path = os.path.join("artifacts" , "model.pkl")
+                # preprocessor_obj_path = os.path.join("artifacts" , "preprocessor.pkl")
+                # model_obj_path = os.path.join("artifacts" , "model.pkl")
 
-                preprocessor = utils.load_obj(preprocessor_obj_path)
-                model = utils.load_obj(model_obj_path)
+                # preprocessor = utils.load_obj(preprocessor_obj_path)
+                # model = utils.load_obj(model_obj_path)
+
+                model_path = utils.download_model(
+                    bucket_name=AWS_S3_BUCKET_NAME,
+                    bucket_file_name="model.pkl",
+                    destination_file_name="model.pkl",
+                )
+
+                model = utils.load_obj(obj_path=model_path)
 
                 preds = model.predict(features)
 
@@ -89,19 +87,11 @@ class PredictionPipeline:
    
         try:
 
-            # prediction_column_name : str = TARGET_COLUMN
             test_df: pd.DataFrame = pd.read_csv(test_data_file_path)
             
             predictions = self.predict(test_df)
             return predictions
-            # input_dataframe[prediction_column_name] = [pred for pred in predictions]
-            # target_column_mapping = {0:'phising', 1:'safe'}
-
-            # input_dataframe[prediction_column_name] = input_dataframe[prediction_column_name].map(target_column_mapping)
             
-            # os.makedirs( self.prediction_file_detail.prediction_output_dirname, exist_ok= True)
-            # input_dataframe.to_csv(self.prediction_file_detail.prediction_file_path, index= False)
-            # logging.info("predictions completed. ")
 
 
 
